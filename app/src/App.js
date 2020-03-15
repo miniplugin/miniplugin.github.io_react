@@ -17,7 +17,10 @@ class App extends Component {
       <div className="App">
         <HeaderBanner title="리액트 IN 자바스크립트" sub="한줄게시판" />
         <BoardList />
-        <BoardView title="리액트 IN 자바스크립트? 미션 프로젝트 (한줄게시판 만들기)" desc="이 프로젝트는 리액트를 이용해서 CRUD를 실습해 볼 수 있습니다." />
+        <BoardView
+          title="리액트 IN 자바스크립트? 미션 프로젝트 (한줄게시판 만들기)"
+          desc="이 프로젝트는 리액트를 이용해서 CRUD를 실습해 볼 수 있습니다."
+        />
       </div>
     );
   }
