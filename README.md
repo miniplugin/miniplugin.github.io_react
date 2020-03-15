@@ -8,13 +8,15 @@
 - 실행환경: React(서버:npm install -g serve앱 설치 후 serve -s build 사용. 또는,1회용 서버생성 npx serve -s build )
 - 리액트버전: create-react-app --version 3.4.0
 - 폴더구조: /app/리액트 한줄게시판 앱 소스.
-- 확인링크: https://miniplugin.github.io/
+- 결과확인링크: https://miniplugin.github.io/
 
 ---
 
 ### 20200315 작업내역(아래)
 
 - 콤포넌트 props 하드코딩.
+- 디자인 퍼블리싱 결과 확인: https://miniplugin.github.io/design_publish/
+- constructor (props) 부모클래스의 초기화한 값을 JSX사용자 태그의 속성(props)에 this값으로 전달.
 
 ### 20200314 작업내역(아래)
 
