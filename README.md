@@ -17,6 +17,7 @@
 - 콤포넌트 props 하드코딩.
 - 디자인 퍼블리싱 결과 확인: https://miniplugin.github.io/design_publish/
 - constructor (props) 부모클래스의 초기화한 값을 JSX사용자 태그의 속성(props)에 this값으로 전달.
+- 다음작업 예정: 이벤트.
 
 ### 20200314 작업내역(아래)
 
