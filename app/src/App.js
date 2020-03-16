@@ -18,6 +18,8 @@ class App extends Component {
     super (props); //부모클래스-Component의 props속성을 사용하겠다고 선언, 이후 부터 this 키워드 사용가능
     //부모클래스 props속성의 state값 초기화
     this.state = {
+      mode: 'default', //변수에 초기값 지정
+      //selected_boardView_id: 2, //선택한 게시물 번호 강제로 초기화 할때,
       headerBanner: {title: '리액트 IN 자바스크립트', sub: '한줄게시판'}, //1차원 배열 json 데이터
       boardList: [
         //2차원 배열 json 데이터
@@ -39,19 +41,65 @@ class App extends Component {
       ],
     };
   }
+  //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
+    console.log ('render()안에서 this는 콤포넌트 모듈 자신을 가리킨다.', this);
+    var _title, _desc = null;
+    if (this.state.mode === 'default') {
+      _title = this.state.headerBanner.title;
+      _desc = this.state.headerBanner.sub;
+    } else if (this.state.mode === 'read') {
+      var i = 0;
+      while (i < this.state.boardList.length) {
+        var data = this.state.boardList[i];
+        if (data.id === this.state.selected_boardView_id) {
+          _title = data.title;
+          _desc = data.desc;
+          break;
+        }
+        i = i + 1;
+      }
+      //초기값 강제로 줄때(아래)
+      /* _title = this.state.boardList[0].title;
+      _desc = this.state.boardList[0].desc; */
+    }
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달
     return (
       <div className="App">
         <HeaderBanner
           title={this.state.headerBanner.title}
           sub={this.state.headerBanner.sub}
+          onChangePage={function () {
+            //alert ('HeaderBanner');//디버그
+            this.setState ({mode: 'default'});
+          }.bind (this)}
         />
-        <BoardList data={this.state.boardList} />
-        <BoardView
-          title="리액트 IN 자바스크립트? 미션 프로젝트 (한줄게시판 만들기)"
-          desc="이 프로젝트는 리액트를 이용해서 CRUD를 실습해 볼 수 있습니다."
+        {/* <header>
+          <h1>
+            <a
+              href="/"
+              onClick={function (e) {
+                console.log (e);
+                e.preventDefault ();
+                //this.state.mode = 'read';//작동않됨.
+                this.setState ({mode: 'default'});
+                //debugger; //크롬 개발자도구 Sources 에서 현재 라인에서 멈춤
+              }.bind (this)} //함수내에서 this사용시 bind 로 주입필요
+            >
+              {this.state.headerBanner.title}
+            </a>
+          </h1>
+          {this.state.headerBanner.sub}
+        </header> */}
+        <BoardList
+          onChangePage={function (id) {
+            //alert ('BoardList');//디버그
+            //debugger;크롬 디버거연동
+            this.setState ({mode: 'read', selected_boardView_id: Number (id)});
+          }.bind (this)}
+          data={this.state.boardList}
         />
+        <BoardView title={_title} desc={_desc} />
       </div>
     );
   }
