@@ -9,7 +9,10 @@ class BoardView extends Component {
           <li className="bbs_title">{this.props.title}</li>
           <li className="bbs_content">
             <div className="editer_content">
-              {this.props.desc}
+              {/* this.props.desc.replace (/\n/g, '<br/>') */}
+              {this.props.desc.split ('\n').map (line => {
+                return <span>{line}<br /></span>;
+              })}
             </div>
           </li>
         </ul>

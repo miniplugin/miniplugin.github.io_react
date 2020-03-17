@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import Header from './components/Header';
 import HeaderBanner from './components/HeaderBanner';
 import BoardList from './components/BoardList';
+import Control from './components/Control';
 import BoardView from './components/BoardView';
+import BoardForm from './components/BoardForm';
 import Footer from './components/Footer';
 import './App.css';
 //헤더 컴포넌트를 만드는 코드(src/components/HeaderBanner.js)
@@ -18,6 +20,7 @@ class App extends Component {
   constructor (props) {
     //props(속성) 과 state(자료) 관계
     super (props); //부모클래스-Component의 props속성을 사용하겠다고 선언, 이후 부터 this 키워드 사용가능
+    this.max_board_id = 3; //전역변수 BoardList의 최근 입력 Key값 초기화
     //부모클래스 props속성의 state값 초기화
     this.state = {
       mode: 'default', //변수에 초기값 지정
@@ -46,10 +49,40 @@ class App extends Component {
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
     console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
-    var _title, _desc = null;
+    var _title, _desc = null, _article = null;
     if (this.state.mode === 'default') {
       _title = this.state.headerBanner.title;
       _desc = this.state.headerBanner.sub;
+      _article = <BoardView title={_title} desc={_desc} />;
+    } else if (this.state.mode === 'list') {
+      _article = null;
+    } else if (this.state.mode === 'create') {
+      _article = (
+        <BoardForm
+          onSubmit={function (_title, _desc) {
+            //신규 BoradList 내용 추가
+            console.log (_title, _desc); //디버그
+            this.max_board_id = this.max_board_id + 1; //화면 리프레시가 않됨. //boardList배열 마지막에 값 추가하기 concat함수(신규데이터리스트 생성) 사용
+            //boardList배열 마지막에 값 추가하기 push함수(오리지널데이터 변경) 사용
+            /* this.state.boardList.push ({
+              id: this.max_board_id,
+              title: _title,
+              desc: _desc,
+            }); this.setState ({boardList: this.state.boardList}); */
+            //boardList배열 마지막에 값 추가하기 concat함수(기존 데이터에 추가) 사용-속도 향상
+            var _contents = this.state.boardList.concat ({
+              id: this.max_board_id,
+              title: _title,
+              desc: _desc,
+            }); //화면 리프레시가 않됨.
+            this.setState ({boardList: _contents});
+            this.setState ({
+              mode: 'read',
+              selected_boardView_id: this.max_board_id,
+            });
+          }.bind (this)}
+        />
+      );
     } else if (this.state.mode === 'read') {
       var i = 0;
       while (i < this.state.boardList.length) {
@@ -61,6 +94,7 @@ class App extends Component {
         }
         i = i + 1;
       }
+      _article = <BoardView title={_title} desc={_desc} />;
       //초기값 강제로 줄때(아래)
       /* _title = this.state.boardList[0].title;
       _desc = this.state.boardList[0].desc; */
@@ -108,7 +142,15 @@ class App extends Component {
               }.bind (this)}
               data={this.state.boardList}
             />
-            <BoardView title={_title} desc={_desc} />
+            <Control
+              onChangeMode={function (_mode, id) {
+                this.setState ({
+                  mode: _mode,
+                  selected_boardView_id: Number (id),
+                });
+              }.bind (this)}
+            />
+            {_article}
           </div>
         </div>
         <Footer />
