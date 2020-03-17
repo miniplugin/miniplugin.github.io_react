@@ -1,8 +1,10 @@
 /* App.js */
 import React, {Component} from 'react';
+import Header from './components/Header';
 import HeaderBanner from './components/HeaderBanner';
 import BoardList from './components/BoardList';
 import BoardView from './components/BoardView';
+import Footer from './components/Footer';
 import './App.css';
 //헤더 컴포넌트를 만드는 코드(src/components/HeaderBanner.js)
 
@@ -66,40 +68,50 @@ class App extends Component {
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달
     return (
       <div className="App">
-        <HeaderBanner
-          title={this.state.headerBanner.title}
-          sub={this.state.headerBanner.sub}
-          onChangePage={function () {
-            //alert ('HeaderBanner');//디버그
-            this.setState ({mode: 'default'});
-          }.bind (this)}
-        />
-        {/* <header>
-          <h1>
-            <a
-              href="/"
-              onClick={function (e) {
-                console.log (e);
-                e.preventDefault ();
-                //this.state.mode = 'read';//작동않됨.
-                this.setState ({mode: 'default'});
-                //debugger; //크롬 개발자도구 Sources 에서 현재 라인에서 멈춤
-              }.bind (this)} //함수내에서 this사용시 bind 로 주입필요
-            >
-              {this.state.headerBanner.title}
-            </a>
-          </h1>
-          {this.state.headerBanner.sub}
-        </header> */}
-        <BoardList
-          onChangePage={function (id) {
-            //alert ('BoardList');//디버그
-            //debugger;크롬 디버거연동
-            this.setState ({mode: 'read', selected_boardView_id: Number (id)});
-          }.bind (this)}
-          data={this.state.boardList}
-        />
-        <BoardView title={_title} desc={_desc} />
+        <Header />
+        <div id="container">
+          <HeaderBanner
+            title={this.state.headerBanner.title}
+            sub={this.state.headerBanner.sub}
+            onChangePage={function () {
+              //alert ('HeaderBanner');//디버그
+              this.setState ({mode: 'default'});
+            }.bind (this)}
+          />
+          {/* <header>
+            <h1>
+              <a
+                href="/"
+                onClick={function (e) {
+                  console.log (e);
+                  e.preventDefault ();
+                  //this.state.mode = 'read';//작동않됨.
+                  this.setState ({mode: 'default'});
+                  //debugger; //크롬 개발자도구 Sources 에서 현재 라인에서 멈춤
+                }.bind (this)} //함수내에서 this사용시 bind 로 주입필요
+              >
+                {this.state.headerBanner.title}
+              </a>
+            </h1>
+            {this.state.headerBanner.sub}
+          </header> */}
+          {/* <!-- bodytext_area --> */}
+          <div className="bodytext_area box_inner">
+            <BoardList
+              onChangePage={function (id) {
+                //alert ('BoardList');//디버그
+                //debugger;크롬 디버거연동
+                this.setState ({
+                  mode: 'read',
+                  selected_boardView_id: Number (id),
+                });
+              }.bind (this)}
+              data={this.state.boardList}
+            />
+            <BoardView title={_title} desc={_desc} />
+          </div>
+        </div>
+        <Footer />
       </div>
     );
   }

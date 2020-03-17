@@ -12,6 +12,13 @@
 
 ---
 
+### 20200317 작업내역(아래)
+
+- 현재까지 작업결과 퍼블리싱된 디자인으로 적용처리.
+- 디자인퍼블리싱: https://miniplugin.github.io/design_publish/
+- 리액트JSX코드에 디자인 적용: https://miniplugin.github.io/
+- 다음작업: Create 기능 구현.
+
 ### 20200316 작업내역(아래)
 
 - 이벤트함수-state상태데이터-props속성-render함수의 관계처리.
