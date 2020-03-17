@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 class Header extends Component {
   render () {
     console.log ('render()안에서 this는 Header.js콤포넌트 모듈 자신을 가리킨다.', this);
+    const menuCloseStyle = {padding: '0 10px 0 50px', background: 'none'};
     return (
       <header id="header">
         <div className="header_area box_inner clear">
@@ -43,6 +44,11 @@ class Header extends Component {
                         </a>
                       </li>
                     </ul>
+                    <p className="closeSubmenu" style={{float: 'right'}}>
+                      <a href="#LINK" style={menuCloseStyle}>
+                        닫기
+                      </a>
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -52,6 +58,11 @@ class Header extends Component {
                       <li><a href="#LINK">한줄게시판</a></li>
                       <li><a href="#LINK">문의하기</a></li>
                     </ul>
+                    <p className="closeSubmenu" style={{float: 'right'}}>
+                      <a href="#LINK" style={menuCloseStyle}>
+                        닫기
+                      </a>
+                    </p>
                   </div>
                 </li>
               </ul>
