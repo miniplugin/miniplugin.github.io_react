@@ -20,11 +20,7 @@ class Header extends Component {
             <nav>
               <ul className="gnb clear">
                 <li>
-                  <a
-                    href="https://github.com/miniplugin/miniplugin.github.io"
-                    target="_new"
-                    className="openAll1"
-                  >
+                  <a href="#LINK" className="openAll1 openAll">
                     리액트정보
                   </a>
 
@@ -50,7 +46,7 @@ class Header extends Component {
                   </div>
                 </li>
                 <li>
-                  <a href="#LINK" className="openAll2">고객센터</a>
+                  <a href="#LINK" className="openAll2 openAll">고객센터</a>
                   <div className="gnb_depth gnb_depth2_2">
                     <ul className="submenu_list">
                       <li><a href="#LINK">한줄게시판</a></li>
