@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 class HeaderBanner extends Component {
   render () {
-    console.log ('render()안에서 this는 콤포넌트 모듈 자신을 가리킨다.', this);
+    console.log ('render()안에서 this는 HeaderBanner.js콤포넌트 모듈 자신을 가리킨다.', this);
     return (
       <div className="location_area customer">
         <div className="box_inner">

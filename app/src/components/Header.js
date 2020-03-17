@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 class Header extends Component {
   render () {
-    console.log ('render()안에서 this는 콤포넌트 모듈 자신을 가리킨다.', this);
+    console.log ('render()안에서 this는 Header.js콤포넌트 모듈 자신을 가리킨다.', this);
     return (
       <header id="header">
         <div className="header_area box_inner clear">

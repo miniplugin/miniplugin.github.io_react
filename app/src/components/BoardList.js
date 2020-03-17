@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 class BoardList extends Component {
   render () {
-    console.log ('render()안에서 this는 콤포넌트 모듈 자신을 가리킨다.', this);
+    console.log ('render()안에서 this는 BoardList.js콤포넌트 모듈 자신을 가리킨다.', this);
     //출력 데이터 처리
     var lists = [];
     var data = this.props.data;

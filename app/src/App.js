@@ -45,7 +45,7 @@ class App extends Component {
   }
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
-    console.log ('render()안에서 this는 콤포넌트 모듈 자신을 가리킨다.', this);
+    console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
     var _title, _desc = null;
     if (this.state.mode === 'default') {
       _title = this.state.headerBanner.title;
