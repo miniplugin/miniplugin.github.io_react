@@ -25,9 +25,9 @@ class App extends Component {
     this.state = {
       mode: 'default', //변수에 초기값 지정
       //selected_boardView_id: 2, //선택한 게시물 번호 강제로 초기화 할때,
-      headerBanner: {title: '리액트 IN 자바스크립트', sub: '한줄게시판'}, //1차원 배열 json 데이터
+      headerBanner: {title: '리액트 IN 자바스크립트', sub: '한줄게시판'}, //json 1차원 데이터 객체
+      //배열 2차원 데이터(아래)
       boardList: [
-        //2차원 배열 json 데이터
         {
           id: 1,
           title: '리액트 IN 자바스크립트? 미션 프로젝트 (한줄게시판 만들기)1',
@@ -48,6 +48,7 @@ class App extends Component {
   }
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
+    console.clear ();
     console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
     var _title, _desc = null, _article = null;
     if (this.state.mode === 'default') {
@@ -62,19 +63,29 @@ class App extends Component {
           onSubmit={function (_title, _desc) {
             //신규 BoradList 내용 추가
             console.log (_title, _desc); //디버그
-            this.max_board_id = this.max_board_id + 1; //화면 리프레시가 않됨. //boardList배열 마지막에 값 추가하기 concat함수(신규데이터리스트 생성) 사용
-            //boardList배열 마지막에 값 추가하기 push함수(오리지널데이터 변경) 사용
+            this.max_board_id = this.max_board_id + 1;
+            //boardList배열 마지막에 값 추가하기 concat함수(원본복제생성 후 변경) 사용-immutable(원본불변)
+            //boardList배열 마지막에 값 추가하기 push함수(원본데이터 변경) 사용
+            //boardList배열 마지막에 값 추가하기 Array.from+push함수(원본복제생성 후 변경) 사용-immutable(원본불변)
             /* this.state.boardList.push ({
               id: this.max_board_id,
               title: _title,
               desc: _desc,
             }); this.setState ({boardList: this.state.boardList}); */
             //boardList배열 마지막에 값 추가하기 concat함수(기존 데이터에 추가) 사용-속도 향상
-            var _contents = this.state.boardList.concat ({
+            /* var _contents = this.state.boardList.concat ({
               id: this.max_board_id,
               title: _title,
               desc: _desc,
-            }); //화면 리프레시가 않됨.
+            });  */
+            var _contents = Array.from (this.state.boardList); //배열일때
+            //var _contents = Object.assign ({}, this.state.boardList);//json 객체일때 사용법.
+            _contents.push ({
+              id: this.max_board_id,
+              title: _title,
+              desc: _desc,
+            });
+            //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
             this.setState ({boardList: _contents});
             this.setState ({
               mode: 'read',

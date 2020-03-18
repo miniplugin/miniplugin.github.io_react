@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
 class BoardList extends Component {
+  //무조건 render()가 호출되는 상황을 방지 false, true
+  shouldComponentUpdate (newProps, newState) {
+    if (this.props.data === newProps.data) {
+      console.log ('BoardList.js콤포넌트 값 무변경시 리로드 render()방지');
+      return false;
+    }
+    return true;
+  }
   render () {
     console.log ('render()안에서 this는 BoardList.js콤포넌트 모듈 자신을 가리킨다.', this);
     //출력 데이터 처리
