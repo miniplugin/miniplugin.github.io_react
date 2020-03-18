@@ -7,7 +7,7 @@ class BoardView extends Component {
       <div>
         {/* <!-- BoardView --> */}
         <ul className="bbsview_list">
-          <li className="bbs_title">{this.props.title}</li>
+          <li className="bbs_title">{this.props.id}. {this.props.title}</li>
           <li className="bbs_content">
             <div className="editer_content">
               {/* this.props.desc.replace (/\n/g, '<br/>') */}

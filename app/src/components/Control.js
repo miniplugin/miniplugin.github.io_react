@@ -16,7 +16,7 @@ class Control extends Component {
           href="/list"
           onClick={function (e) {
             e.preventDefault ();
-            this.props.onChangeMode ('list', '0');
+            this.props.onChangeMode ('list');
           }.bind (this)}
           className="btn_bbs"
         >
@@ -26,7 +26,7 @@ class Control extends Component {
           href="/create"
           onClick={function (e) {
             e.preventDefault ();
-            this.props.onChangeMode ('create', '0');
+            this.props.onChangeMode ('create');
           }.bind (this)}
           className="btn_bbs"
         >
@@ -36,7 +36,7 @@ class Control extends Component {
           href="/update"
           onClick={function (e) {
             e.preventDefault ();
-            this.props.onChangeMode ('update', '0');
+            this.props.onChangeMode ('update');
           }.bind (this)}
           className="btn_bbs"
         >
@@ -46,7 +46,7 @@ class Control extends Component {
           href="/"
           onClick={function (e) {
             e.preventDefault ();
-            this.props.onChangeMode ('delete', '0');
+            this.props.onChangeMode ('delete');
           }.bind (this)}
           className="btn_bbs"
         >

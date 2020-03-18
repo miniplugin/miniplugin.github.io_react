@@ -6,6 +6,7 @@ import BoardList from './components/BoardList';
 import Control from './components/Control';
 import BoardView from './components/BoardView';
 import BoardForm from './components/BoardForm';
+import BoardFormUpdate from './components/BoardFormUpdate';
 import Footer from './components/Footer';
 import './App.css';
 //헤더 컴포넌트를 만드는 코드(src/components/HeaderBanner.js)
@@ -24,7 +25,7 @@ class App extends Component {
     //부모클래스 props속성의 state값 초기화
     this.state = {
       mode: 'default', //변수에 초기값 지정
-      //selected_boardView_id: 2, //선택한 게시물 번호 강제로 초기화 할때,
+      selected_boardView_id: null, //선택한 게시물 번호 강제로 초기화 할때,
       headerBanner: {title: '리액트 IN 자바스크립트', sub: '한줄게시판'}, //json 1차원 데이터 객체
       //배열 2차원 데이터(아래)
       boardList: [
@@ -46,17 +47,26 @@ class App extends Component {
       ],
     };
   }
-  //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
-  render () {
-    console.clear ();
-    console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
-    var _title, _desc = null, _article = null;
+  getBoardViewContent () {
+    var i = 0;
+    while (i < this.state.boardList.length) {
+      var data = this.state.boardList[i];
+      if (data.id === this.state.selected_boardView_id) {
+        return data;
+        //break;
+      }
+      i = i + 1;
+    }
+  }
+  getBoardView () {
+    var _title, _desc = null, _article = null, _content = null;
     if (this.state.mode === 'default') {
       _title = this.state.headerBanner.title;
       _desc = this.state.headerBanner.sub;
-      _article = <BoardView title={_title} desc={_desc} />;
+      _article = <BoardView id={'헤더배너'} title={_title} desc={_desc} />;
     } else if (this.state.mode === 'list') {
       _article = null;
+      //this.state.selected_boardView_id = 0;
     } else if (this.state.mode === 'create') {
       _article = (
         <BoardForm
@@ -94,22 +104,63 @@ class App extends Component {
           }.bind (this)}
         />
       );
-    } else if (this.state.mode === 'read') {
-      var i = 0;
-      while (i < this.state.boardList.length) {
-        var data = this.state.boardList[i];
-        if (data.id === this.state.selected_boardView_id) {
-          _title = data.title;
-          _desc = data.desc;
-          break;
-        }
-        i = i + 1;
+    } else if (this.state.mode === 'update') {
+      _content = this.getBoardViewContent ();
+      //if (_content === undefined) {
+      if (this.state.selected_boardView_id === null) {
+        console.log ('update제약', _content);
+        _title = '수정확인';
+        _desc = '게시물을 선택하셔야 합니다.';
+        _article = <BoardView title={_title} desc={_desc} />;
+        return _article;
       }
+      _article = (
+        <BoardFormUpdate
+          data={_content}
+          onSubmit={function (_id, _title, _desc) {
+            //신규 BoradList 내용 추가
+            console.log ('update', _id, _title, _desc); //디버그
+            var _contents = Array.from (this.state.boardList); //배열복제
+            var i = 0;
+            while (i < _contents.length) {
+              if (_contents[i].id === _id) {
+                _contents[i] = {id: _id, title: _title, desc: _desc};
+                break;
+              }
+              i = i + 1;
+            }
+            //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
+            this.setState ({boardList: _contents, mode: 'read'});
+          }.bind (this)}
+        />
+      );
+    } else if (this.state.mode === 'delete') {
+      _article = null;
+      console.log ('delete후 출력');
+      _title = '삭제확인';
+      _desc = '게시물이 정상 삭제되었습니다.';
       _article = <BoardView title={_title} desc={_desc} />;
+      return _article;
+    } else if (this.state.mode === 'read') {
+      _content = this.getBoardViewContent ();
+      _article = (
+        <BoardView
+          id={_content.id}
+          title={_content.title}
+          desc={_content.desc}
+        />
+      );
       //초기값 강제로 줄때(아래)
       /* _title = this.state.boardList[0].title;
       _desc = this.state.boardList[0].desc; */
     }
+    return _article;
+  }
+  //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
+  render () {
+    console.clear ();
+    console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
+
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달
     return (
       <div className="App">
@@ -120,7 +171,7 @@ class App extends Component {
             sub={this.state.headerBanner.sub}
             onChangePage={function () {
               //alert ('HeaderBanner');//디버그
-              this.setState ({mode: 'default'});
+              this.setState ({mode: 'default', selected_boardView_id: null});
             }.bind (this)}
           />
           {/* <header>
@@ -154,14 +205,46 @@ class App extends Component {
               data={this.state.boardList}
             />
             <Control
-              onChangeMode={function (_mode, id) {
-                this.setState ({
-                  mode: _mode,
-                  selected_boardView_id: Number (id),
-                });
+              onChangeMode={function (_mode) {
+                if (_mode === 'list') {
+                  this.setState ({
+                    selected_boardView_id: null,
+                  });
+                }
+                if (_mode === 'delete') {
+                  if (this.state.selected_boardView_id === null) {
+                    alert ('선택된 게시물이 없습니다.');
+                    return false;
+                  }
+                  if (window.confirm ('정말로 삭제하시겠습니까?')) {
+                    var _deleteContents = Array.from (this.state.boardList);
+                    var i = 0;
+                    while (i < _deleteContents.length) {
+                      if (
+                        _deleteContents[i].id ===
+                        this.state.selected_boardView_id
+                      ) {
+                        _deleteContents.splice (i, 1);
+                        this.setState ({
+                          selected_boardView_id: null,
+                        });
+                        break;
+                      }
+                      i = i + 1;
+                    }
+                    this.setState ({
+                      boardList: _deleteContents,
+                      mode: 'delete',
+                    });
+                  }
+                } else {
+                  this.setState ({
+                    mode: _mode,
+                  });
+                }
               }.bind (this)}
             />
-            {_article}
+            {this.getBoardView ()}
           </div>
         </div>
         <Footer />

@@ -12,6 +12,16 @@
 
 ---
 
+### 20200318 작업내역(아래)
+
+- Create마무리 및 immutable(원본불변) 데이터적용 처리.
+- Update, Delete 데이터 처리.
+- 다음작업예정: 공공데이터(마스크판매약국정보)를 리액트 리스트로 출력하기
+- 1-마스크공공데이터json소스: https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json?page=1
+- 2-API정보: https://app.swaggerhub.com/apis/Promptech/public-mask-info/20200307-oas3#
+- 3-마스크공공데이터 소스정보: https://www.data.go.kr/dataset/15043025/openapi.do
+- 4-API입출력정보: https://app.swaggerhub.com/apis-docs/Promptech/public-mask-info/20200307-oas3#/
+
 ### 20200317 작업내역(아래)
 
 - 현재까지 작업결과 퍼블리싱된 디자인으로 적용처리.
