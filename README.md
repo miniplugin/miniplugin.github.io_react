@@ -7,7 +7,8 @@
 - 개발환경: VSCode IDE사용, create-react-app 앱사용.(npm run start 실행결과 크롬에서 정상 출력됨. 단, IE브라우저에서는 실행 않됨)
 - 실행환경: React(서버:npm install -g serve앱 설치 후 serve -s build 사용. 또는,1회용 서버생성 npx serve -s build )
 - 리액트버전: create-react-app --version 3.4.0
-- 폴더구조: /app/리액트 한줄게시판 앱 소스.
+- 폴더구조: /app/리액트 One페이지 게시판 앱 소스.
+- 폴더구조: /app_mask/리액트 공적마스크 판매처 및 재고 현황 조회 앱 소스.
 - 결과확인링크: https://miniplugin.github.io/
 
 ---
