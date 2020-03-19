@@ -2122,16 +2122,22 @@ h1.loginTit a img {
     font-size: 14px;
   }
   .bbsListTbl th:nth-child(1) {
-    display: none;
+    width: 30%;
   }
   .bbsListTbl th:nth-child(2) {
-    width: 70%;
+    width: 40%;
   }
   .bbsListTbl th:nth-child(3) {
-    display: none;
+    width: 30%;
   }
   .bbsListTbl th:nth-child(4) {
-    width: 30%;
+    display: none;
+  }
+  .bbsListTbl th:nth-child(5) {
+    display: none;
+  }
+  .bbsListTbl th:nth-child(6) {
+    display: none;
   }
   .bbsListTbl td {
     text-align: center;
@@ -2142,16 +2148,22 @@ h1.loginTit a img {
     display: block;
   }
   .bbsListTbl td:nth-child(1) {
-    display: none;
+    width: 30%;
   }
   .bbsListTbl td:nth-child(2) {
-    width: 70%;
+    width: 40%;
   }
   .bbsListTbl td:nth-child(3) {
-    display: none;
+    width: 30%;
   }
   .bbsListTbl td:nth-child(4) {
-    width: 30%;
+    display: none;
+  }
+  .bbsListTbl td:nth-child(5) {
+    display: none;
+  }
+  .bbsListTbl td:nth-child(6) {
+    display: none;
   }
 
   /* 공지사항 상세보기 */

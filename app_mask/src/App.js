@@ -24,7 +24,7 @@ class App extends Component {
     this.state = {
       mode: 'list', //변수에 초기값 지정
       selected_boardView_id: null, //선택한 게시물 번호 강제로 초기화 할때,
-      headerBanner: {title: '리액트 IN 자바스크립트', sub: '공적마스크 판매처 및 재고 현황 조회'}, //json 1차원 데이터 객체
+      headerBanner: {title: '리액트', sub: '공적마스크 판매처 및 재고 현황 조회'}, //json 1차원 데이터 객체
       //배열 2차원 데이터(아래)
       boardList: [],
       /* boardList: [
