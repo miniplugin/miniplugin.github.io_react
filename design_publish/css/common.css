@@ -1147,7 +1147,7 @@ footer .foot_area .snslink li + li + li a {
   text-align: left;
 }
 .bbsListTbl td:nth-child(1) {
-  width: 5%;
+  width: 10%;
 }
 .bbsListTbl td:nth-child(2) {
   width: 55%;
