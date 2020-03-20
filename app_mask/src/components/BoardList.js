@@ -45,6 +45,11 @@ class BoardList extends Component {
     //출력 데이터 처리
     var lists = [];
     var data = this.props.data;
+    if (data == null) {
+      alert ('데이터가 없습니다.');
+      return false;
+    }
+    var listCount = data.length;
     var i = 0;
     while (i < data.length) {
       lists.push (
@@ -77,19 +82,6 @@ class BoardList extends Component {
     }
     return (
       <div>
-        <form action="#LINK" className="minisrch_form">
-          <fieldset>
-            <legend>검색</legend>
-            <input
-              type="text"
-              className="tbox"
-              title="검색어를 입력해주세요"
-              placeholder="검색어를 입력해주세요"
-              value="충청남도 천안시 신부동"
-            />
-            <a href="#LINK" className="btn_srch">검색</a>
-          </fieldset>
-        </form>
         {/* <!-- BoardList --> */}
         <table className="bbsListTbl" summary="번호,주소,코드,위도,경도,약국명,타입 등을 제공하는 표">
           <caption className="hdd">
@@ -98,7 +90,7 @@ class BoardList extends Component {
           <thead>
             <tr>
               <th scope="col">판매처명</th>
-              <th scope="col">주소</th>
+              <th scope="col">주소[검색: {listCount} 개]</th>
               <th scope="col">재고상태</th>
               <th scope="col">입고시간</th>
               <th scope="col">생성일자</th>

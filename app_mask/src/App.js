@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header';
 import HeaderBanner from './components/HeaderBanner';
+import SearchForm from './components/SearchForm';
 import BoardList from './components/BoardList';
 import BoardView from './components/BoardView';
 import Footer from './components/Footer';
@@ -24,6 +25,7 @@ class App extends Component {
     this.state = {
       mode: 'list', //변수에 초기값 지정
       selected_boardView_id: null, //선택한 게시물 번호 강제로 초기화 할때,
+      searchWord: '', //검색어 상태 입력예, 충청남도 천안시 동남구 신부동
       headerBanner: {title: '리액트', sub: '공적마스크 판매처 및 재고 현황 조회'}, //json 1차원 데이터 객체
       //배열 2차원 데이터(아래)
       boardList: [],
@@ -45,11 +47,20 @@ class App extends Component {
   }
 
   //초기 공공데이터 json(텍스트로변환된) 내용 받아오기
-  componentDidMount () {
+  componentDidMount (_searchWord) {
     var boardList_storeInfos = null; //
-    fetch (
-      'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818754&lng=127.153618'
-    )
+    var fetchUrl = null;
+    //alert (encodeURIComponent (_searchWord));
+    if (_searchWord === undefined) {
+      fetchUrl =
+        'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818434&lng=127.1527916';
+    } else {
+      var query = encodeURIComponent (_searchWord);
+      fetchUrl =
+        'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address=' +
+        query;
+    }
+    fetch (fetchUrl)
       .then (response => response.text ())
       .then (responseText => {
         /* API사용하지 않고, 직접 Json데이터 사용시 */
@@ -58,6 +69,9 @@ class App extends Component {
         //console.log ('jsonResult', jsonResult);//json 파싱 확인
         //boardList_storeInfos = jsonResult.storeInfos; //storeInfos 속성도 array 형태로 받아주고,-판매점정보만
         boardList_storeInfos = jsonResult.stores; //storeInfos 속성도 array 형태로 받아주고,-판매점및 재고까지
+        if (boardList_storeInfos === null) {
+          return false;
+        }
         /* boardList_storeInfos = [
           {
             addr: '충청남도 홍성군 갈산면 상촌로 12-1 (두류동)',
@@ -137,11 +151,26 @@ class App extends Component {
             sub={this.state.headerBanner.sub}
             onChangePage={function () {
               //alert ('HeaderBanner');//디버그
+              this.componentDidMount ();
               this.setState ({mode: 'list', selected_boardView_id: null});
             }.bind (this)}
           />
           {/* <!-- bodytext_area --> */}
           <div className="bodytext_area box_inner">
+            <SearchForm
+              searchWord={this.state.searchWord}
+              onSubmit={function (_searchWord) {
+                //검색된 BoradList 내용 출력
+                console.log ('_searchWord', _searchWord); //디버그
+                if (_searchWord === '') {
+                  this.componentDidMount ();
+                } else {
+                  this.componentDidMount (_searchWord);
+                }
+                this.setState ({mode: 'list'});
+                //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
+              }.bind (this)}
+            />
             <BoardList
               onChangePage={function (code) {
                 //alert ('BoardList');//디버그

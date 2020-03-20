@@ -465,7 +465,7 @@ hr {
   text-align: center;
   height: 35px;
   font-size: 14px;
-  line-height: 35px;
+  /* line-height: 35px; */
   vertical-align: middle;
   background: #384d75;
   color: #fff !important;
@@ -1116,7 +1116,7 @@ footer .foot_area .snslink li + li + li a {
 }
 .minisrch_form .tbox {
   padding: 0 5px 0 30px;
-  width: 200px;
+  width: 250px;
   height: 35px;
   line-height: 35px;
   border: none;
