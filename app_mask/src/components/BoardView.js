@@ -1,10 +1,30 @@
 import React, {Component} from 'react';
+//react-inline-script vs react-safe va react-helmet
+//npm install --save react-helmet @types/react-helmet
 class BoardView extends Component {
+  componentDidMount () {
+    /* //구글지도 외부 js 불러오기
+      var loadScript = function (src) {
+      var tag = document.createElement ('script');
+      tag.async = false;
+      tag.src = src;
+      document.body.appendChild (tag);
+      //document.getElementsByTagName ('body').appendChild (tag);
+    };
+    loadScript ('//maps.google.com/maps/api/js?sensor=true');
+    loadScript ('/design_publish/js/location.js');
+    const script = document.createElement ('script');
+    script.src = '//maps.google.com/maps/api/js?sensor=true';
+    script.async = true;
+    document.body.appendChild (script); */
+  }
   render () {
     console.log ('render()안에서 this는 BoardView.js콤포넌트 모듈 자신을 가리킨다.', this);
     var i = 0;
     return (
       <div>
+        {/* <!-- 지도 사용 공간 --> */}
+        <div id="map_canvas" style={{width: '100%', height: '100%'}} />
         {/* <!-- BoardView --> */}
         <ul className="bbsview_list">
           <li className="bbs_title">{this.props.name}</li>
