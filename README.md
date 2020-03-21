@@ -13,6 +13,12 @@
 
 ---
 
+### 20200321 작업내역(아래)
+
+- 공적마스크 판매처 및 재고 현황 조회 구글지도링크연동 작업OK.
+- 구글맵 기술참조: https://github.com/google-map-react/google-map-react //사용함.
+- npm install --save google-map-react //사용함.
+
 ### 20200320 작업내역(아래)
 
 - 공적마스크 판매처 및 재고 현황 조회 검색기능 추가 작업OK.

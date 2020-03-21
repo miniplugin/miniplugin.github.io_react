@@ -171,6 +171,7 @@ class App extends Component {
                 //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
               }.bind (this)}
             />
+            {this.getBoardView ()}
             <BoardList
               onChangePage={function (code) {
                 //alert ('BoardList');//디버그
@@ -182,7 +183,6 @@ class App extends Component {
               }.bind (this)}
               data={this.state.boardList}
             />
-            {this.getBoardView ()}
           </div>
         </div>
         <Footer />
