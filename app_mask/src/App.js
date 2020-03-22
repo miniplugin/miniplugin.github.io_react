@@ -6,6 +6,7 @@ import SearchForm from './components/SearchForm';
 import BoardList from './components/BoardList';
 import BoardView from './components/BoardView';
 import Footer from './components/Footer';
+import Map from './components/Map';
 import './App.css';
 //헤더 컴포넌트를 만드는 코드(src/components/HeaderBanner.js)
 
@@ -25,7 +26,8 @@ class App extends Component {
     this.state = {
       mode: 'list', //변수에 초기값 지정
       selected_boardView_id: null, //선택한 게시물 번호 강제로 초기화 할때,
-      searchWord: '', //검색어 상태 입력예, 충청남도 천안시 동남구 신부동
+      searchWord: '충청남도 천안시 동남구 신부동', //검색어 상태 입력예, 충청남도 천안시 동남구 신부동
+      fetchUrl: 'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818434&lng=127.1527916',
       headerBanner: {title: '리액트', sub: '공적마스크 판매처 및 재고 현황 조회'}, //json 1차원 데이터 객체
       //배열 2차원 데이터(아래)
       boardList: [],
@@ -49,18 +51,24 @@ class App extends Component {
   //초기 공공데이터 json(텍스트로변환된) 내용 받아오기
   componentDidMount (_searchWord) {
     var boardList_storeInfos = null; //
-    var fetchUrl = null;
+    var localfetchUrl = null;
+    var query = null;
     //alert (encodeURIComponent (_searchWord));
     if (_searchWord === undefined) {
-      fetchUrl =
-        'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818434&lng=127.1527916';
+      /*localfetchUrl =
+      ('https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818434&lng=127.1527916');*/
+      query = encodeURIComponent (this.state.searchWord);
+      localfetchUrl =
+        'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address=' +
+        query;
     } else {
-      var query = encodeURIComponent (_searchWord);
-      fetchUrl =
+      query = encodeURIComponent (_searchWord);
+      localfetchUrl =
         'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByAddr/json?address=' +
         query;
     }
-    fetch (fetchUrl)
+    this.setState ({fetchUrl: localfetchUrl});
+    fetch (localfetchUrl)
       .then (response => response.text ())
       .then (responseText => {
         /* API사용하지 않고, 직접 Json데이터 사용시 */
@@ -138,7 +146,7 @@ class App extends Component {
   }
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
-    console.clear ();
+    //console.clear ();
     console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
 
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달
@@ -171,6 +179,7 @@ class App extends Component {
                 //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
               }.bind (this)}
             />
+            <Map fetchUrldata={this.state.fetchUrl} />
             {this.getBoardView ()}
             <BoardList
               onChangePage={function (code) {
@@ -180,6 +189,11 @@ class App extends Component {
                   mode: 'read',
                   selected_boardView_id: code,
                 });
+              }.bind (this)}
+              onChangePageAdd={function () {
+                //alert ('HeaderBanner');//디버그
+                this.componentDidMount ();
+                this.setState ({mode: 'list', selected_boardView_id: null});
               }.bind (this)}
               data={this.state.boardList}
             />
