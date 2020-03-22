@@ -28,7 +28,10 @@ class App extends Component {
       selected_boardView_id: null, //선택한 게시물 번호 강제로 초기화 할때,
       searchWord: '충청남도 천안시 동남구 신부동', //검색어 상태 입력예, 충청남도 천안시 동남구 신부동
       fetchUrl: 'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=36.818434&lng=127.1527916',
-      headerBanner: {title: '리액트', sub: '공적마스크 판매처 및 재고 현황 조회'}, //json 1차원 데이터 객체
+      headerBanner: {
+        title: '이 사이트는 리액트기술 테스트용 입니다.',
+        sub: 'Google 지도를 제대로 로드할 수 없습니다.',
+      }, //json 1차원 데이터 객체
       //배열 2차원 데이터(아래)
       boardList: [],
       /* boardList: [

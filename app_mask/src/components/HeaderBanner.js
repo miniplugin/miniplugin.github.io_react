@@ -25,7 +25,9 @@ class HeaderBanner extends Component {
             </a>
           </h2>
           <p className="location">
-            고객센터 <span className="path">/</span> {this.props.sub}
+            Google Maps API 키를 입력하지 않았기 때문에 아래와 같은 메세지가 나옵니다.
+            <span className="path">/</span><br /><br />
+            [ {this.props.sub} ] - 하지만, 결과를 확인 하시는 데 지장은 없습니다.
           </p>
           <ul className="page_menu clear">
             <li>
