@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 //구글맵 기술참조: https://github.com/google-map-react/google-map-react //사용함.
 //npm install --save google-map-react //사용함.
-//react-inline-script vs react-safe va react-helmet //사용안함.
-//npm unstall react-helmet @types/react-helmet //사용안함.
 class BoardView extends Component {
   constructor (props) {
     super (props); //부모클래스-Component의 props속성을 사용하겠다고 선언, 이후 부터 this 키워드 사용가능
@@ -15,25 +13,6 @@ class BoardView extends Component {
       zoom: 18,
       showMyComponent: 'show',
     };
-  }
-  componentDidMount () {
-    /* //구글지도 외부 js 불러오기 - 사용안하는 코드(참고용).
-    // 다중 스크립트
-    var loadScript = function (src) {
-      var tag = document.createElement ('script');
-      tag.async = false;
-      tag.src = src;
-      document.body.appendChild (tag);
-      //document.getElementsByTagName ('body').appendChild (tag);
-    };
-    loadScript ('//maps.google.com/maps/api/js?sensor=true');
-    loadScript ('/design_publish/js/location.js');
-    // 단일 스크립트
-    const script = document.createElement ('script');
-    script.src = '//maps.google.com/maps/api/js?sensor=true';
-    script.async = true;
-    document.body.appendChild (script);
-    */
   }
   renderSwitch (param) {
     switch (param) {
@@ -69,7 +48,6 @@ class BoardView extends Component {
   }
   render () {
     const onMarkerClick = evt => {
-      //alert ('markerShow');
       //alert (this.props.showMyComponent);
       //alert (this.state.showMyComponent);
       if (this.state.showMyComponent === undefined) {
@@ -79,7 +57,6 @@ class BoardView extends Component {
       }
     };
     const onMarkerDeleteClick = evt => {
-      //alert ('markerHide');
       this.setState ({showMyComponent: undefined});
     };
     const AnyReactComponent = ({text}) => (
