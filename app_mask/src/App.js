@@ -153,7 +153,7 @@ class App extends Component {
   }
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
-    //console.clear ();
+    //console.clear (); //콘솔 지저분한것 때문에... 디버그시 주석해제 필요.
     console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
 
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달

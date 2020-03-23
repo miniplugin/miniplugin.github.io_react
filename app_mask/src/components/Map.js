@@ -8,7 +8,7 @@ import {
   InfoWindow,
 } from 'react-google-maps';
 /* 현재 PC위치 찾기 */
-const getLocation = () => {
+/* const getLocation = () => {
   const pos = {};
   const geolocation = navigator.geolocation;
   if (geolocation) {
@@ -23,29 +23,30 @@ const getLocation = () => {
   }
   return pos;
 };
-const myLocation = getLocation (); // object has lat and lng
+const myLocation = getLocation (); */
+// object has lat and lng 현재는 사용자 위치정보를 필요로 하지 않는다.
 const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
   //console.log ('props.markers', props.markers);
   //console.log ('props.markers.length----------', props.markers.length);
   var lat, lng = null;
   if (props.markers.length === 0) {
-    lat = myLocation.lat;
-    lng = myLocation.lng;
+    lat = 36.818434; //myLocation.lat;//현재는 사용자 위치정보를 필요로 하지 않는다.
+    lng = 127.1527916; //myLocation.lng;//그래서 초기값을 더미로 주었습니다.
   } else if (props.mapReflng === null) {
     lat = props.markers[0].lat;
     lng = props.markers[0].lng;
   } else {
-    console.log ('props.mapReflng----------', props.mapReflng);
+    //console.log ('props.mapReflng----------', props.mapReflng);
     lat = props.mapReflat;
     lng = props.mapReflng;
   }
   return (
     <GoogleMap
       defaultZoom={16.3}
-      defaultCenter={{lat: lat, lng: lng}}
+      defaultCenter={{lat: Number (lat), lng: Number (lng)}}
       center={{
-        lat: lat, //36.818434,
-        lng: lng, //127.1527916,
+        lat: Number (lat),
+        lng: Number (lng),
       }}
       ref={props.onMapLoad}
       onDragEnd={props.onDragEnd}
@@ -117,8 +118,8 @@ export default class ShelterMap extends Component {
   handleMapDrag = this.handleMapDrag.bind (this);
   handleMapLoad = this.handleMapLoad.bind (this);
   componentDidUpdate (newProps, newState) {
-    console.log ('this.state.mapFetchUrl === ', this.state.mapFetchUrl);
-    console.log ('this.props.fetchUrldata === ', this.props.fetchUrldata);
+    //console.log ('this.state.mapFetchUrl === ', this.state.mapFetchUrl);
+    //console.log ('this.props.fetchUrldata === ', this.props.fetchUrldata);
     if (this.state.mapFetchUrl === this.props.fetchUrldata) {
       console.log ('render()안에서 this는 Map.js콤포넌트 모듈 자신을 가리킨다.', this);
       return false;
