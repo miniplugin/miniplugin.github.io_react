@@ -107,7 +107,7 @@ class BoardView extends Component {
         <div
           className="popup_inner"
           id="map_canvas"
-          style={{width: '50%', height: '50vh'}}
+          style={{width: '90%', height: '90vh'}}
         >
           <div style={{textAlign: 'right'}}>
             <button
