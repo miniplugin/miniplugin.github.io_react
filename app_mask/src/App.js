@@ -142,6 +142,10 @@ class App extends Component {
           stock_at={_content.stock_at}
           remain_stat={_content.remain_stat}
           created_at={_content.created_at}
+          onClosePage={function () {
+            this.componentDidMount ();
+            this.setState ({mode: 'list', selected_boardView_id: null});
+          }.bind (this)}
         />
       );
     }
@@ -149,7 +153,7 @@ class App extends Component {
   }
   //props-state의 값이 바뀌면 html을 그리는 함수 render 자동으로 재 실행됨
   render () {
-    //console.clear ();
+    console.clear ();
     console.log ('render()안에서 this는 App.js콤포넌트 모듈 자신을 가리킨다.', this);
 
     //constructor (props) 부모클래스의 초기화한 값을 아래 태그의 속성(props)에 this값으로 전달
@@ -192,11 +196,6 @@ class App extends Component {
                   mode: 'read',
                   selected_boardView_id: code,
                 });
-              }.bind (this)}
-              onChangePageAdd={function () {
-                //alert ('HeaderBanner');//디버그
-                this.componentDidMount ();
-                this.setState ({mode: 'list', selected_boardView_id: null});
               }.bind (this)}
               data={this.state.boardList}
             />

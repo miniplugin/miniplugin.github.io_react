@@ -84,20 +84,28 @@ export default class ShelterMap extends Component {
     //console.log (newState);
     if (this.state.mapFetchUrl === this.props.fetchUrldata) {
       console.log ('render()안에서 this는 Map.js콤포넌트 모듈 자신을 가리킨다.', this);
-      return;
+      return false;
     } else {
       //alert (this.state.mapFetchUrl);
       //alert ('Map: ' + this.props.fetchUrldata);
       this.setState ({mapFetchUrl: this.props.fetchUrldata});
       this.componentDidMount ();
-      //this.render ();
     }
     console.log ('componentDidUpdate');
   }
   componentDidMount () {
-    fetch (this.props.fetchUrldata).then (r => r.json ()).then (data => {
-      this.setState ({shelters: data.stores});
-    });
+    var result = null;
+    result = fetch (this.props.fetchUrldata)
+      .then (r => r.json ())
+      .then (mapdata => {
+        this.setState ({shelters: mapdata.stores});
+      });
+    //console.log ('result: 누락되는 경우 대비 실행---------- ' + result);
+    if (result === null) {
+      fetch (this.props.fetchUrldata).then (r => r.json ()).then (data => {
+        this.setState ({shelters: data.stores});
+      });
+    }
   }
   handleClick = (marker, event) => {
     // console.log({ marker })

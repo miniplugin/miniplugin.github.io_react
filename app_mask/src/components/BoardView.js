@@ -102,9 +102,24 @@ class BoardView extends Component {
     console.log ('render()안에서 this는 BoardView.js콤포넌트 모듈 자신을 가리킨다.', this);
     //var i = 0;//아래 textarea 에서 사용시.
     return (
-      <div>
+      <div className="popup">
         {/* <!-- 지도 사용 공간 --> */}
-        <div id="map_canvas" style={{width: '100%', height: '50vh'}}>
+        <div
+          className="popup_inner"
+          id="map_canvas"
+          style={{width: '50%', height: '50vh'}}
+        >
+          <div style={{textAlign: 'right'}}>
+            <button
+              style={{fontSize: '1.3em', padding: '0 5px'}}
+              onClick={function (e) {
+                e.preventDefault ();
+                this.props.onClosePage ();
+              }.bind (this)}
+            >
+              X
+            </button>
+          </div>
           <GoogleMapReact
             //bootstrapURLKeys={{key: 'YOUR KEY HERE'}}//
             defaultCenter={this.state.center}
@@ -116,7 +131,6 @@ class BoardView extends Component {
               lng={this.props.lng}
               text={this.props.name}
             />
-
           </GoogleMapReact>
         </div>
         {/* <!-- BoardView --> */}

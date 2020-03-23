@@ -91,17 +91,7 @@ class BoardList extends Component {
             <tr>
               <td>검색결과</td>
               <td>[검색: {listCount} 개]<br />주소[클릭시 판매처별 확대지도가 나타납니다.]</td>
-              <td>
-                <a
-                  href="/"
-                  onClick={function (e) {
-                    e.preventDefault ();
-                    this.props.onChangePageAdd ();
-                  }.bind (this)}
-                >
-                  판매지도<br />[숨기기]
-                </a>
-              </td><td /><td /><td />
+              <td /><td /><td /><td />
             </tr>
             <tr>
               <th scope="col">판매처명</th>
