@@ -28,20 +28,30 @@ class HeaderBanner extends Component {
             Google Maps API 키를 입력하지 않았기 때문에 아래와 같은 메세지가 나옵니다.
             <span className="path">/</span><br /><br />
             [ {this.props.sub} ] - 하지만, 결과를 확인 하시는 데 지장은 없습니다.
+            <br /><br />[지도에 표시된 핀 이미지 색상의 의미]<br />
+            <img src="/design_publish/img/green-dot.png" alt="plenty" />
+            [100개이상] /
+            <img src="/design_publish/img/yellow-dot.png" alt="some" />
+            [30~100개미만] /
+            <img src="/design_publish/img/red-dot.png" alt="few" />
+            [2~30개미만]  /
+            <img src="/design_publish/img/gray-dot.png" alt="empty,break" />
+            [1개미만,판매중지]
           </p>
           <ul className="page_menu clear">
+            [지도에 표시된 핀 이미지 색상의 의미]<br /><br />
             <li>
-              <a
-                href="/"
-                onClick={function (e) {
-                  e.preventDefault ();
-                  this.props.onChangePage ();
-                }.bind (this)}
-              >
-                {this.props.title}
-              </a>
+              <img src="/design_publish/img/green-dot.png" alt="plenty" />
+              [100개이상]
+              <img src="/design_publish/img/yellow-dot.png" alt="some" />
+              [30~100개미만]
             </li>
-            <li>{this.props.sub}</li>
+            <li>
+              <img src="/design_publish/img/red-dot.png" alt="few" />
+              [2~30개미만]
+              <img src="/design_publish/img/gray-dot.png" alt="empty,break" />
+              [1개미만,판매중지]
+            </li>
           </ul>
         </div>
       </div>
