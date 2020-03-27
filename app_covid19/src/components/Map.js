@@ -89,10 +89,10 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
           icons = '/design_publish/img/red-dot.png';
         } else if (resultday < 4) {
           //'1~3일이하';
-          icons = '/design_publish/img/green-dot.png';
+          icons = '/design_publish/img/yellow-dot.png';
         } else if (resultday < 9) {
           //'4~9일이하';
-          icons = '/design_publish/img/yellow-dot.png';
+          icons = '/design_publish/img/green-dot.png';
         }
         //Math.floor (Math.random () * 50000 + 1)
         return (
