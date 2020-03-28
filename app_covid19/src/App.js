@@ -27,7 +27,7 @@ class App extends Component {
     //부모클래스 props속성의 state값 초기화
     this.state = {
       searchWord: '충청남도 천안시', //검색어 상태 입력예, 도(광역시) 시(군) 단위입력
-      fetchUrl: '/javascripts/ndata.js',
+      fetchUrl: '/ndata.js',
       headerBanner: {
         title: '이 사이트는 리액트기술 테스트용 입니다.',
         sub: 'Google 지도를 제대로 로드할 수 없습니다.',

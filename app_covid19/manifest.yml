@@ -1,0 +1,10 @@
+---
+applications:
+  - name: covid19
+    memory: 512M
+    host: covid19
+    domain: paas-ta.org
+    instances: 1
+    disk_quota: 512M
+env:
+  http_proxy: http://coronamap.site/javascripts
