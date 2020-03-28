@@ -132,7 +132,7 @@
 - Document This: 자동으로 JSDoc 주석을 만들어준다.
 - Git History: Git History를 에디터 내에서 그래프 형태로 볼 수 있다.
 - npm Intellisense: npm module을 import 할 때 자동완성 기능을 제공한다.
-- Path Intellisense: 디렉토리 경로와 파일명 자동 완성 기능 제공
+- Path Intellisense: 디렉토리 경로와 파일명 자동 완성 기능 제공.
 - Project Manager: 여러 프로젝트를 진행 하고 있다면 추천하는 익스텐션. workspace를 프로젝트 별로 관리 할 수 있다.
 - TODO Highlight: TODO, FIXME, NOTE 등 주석에 사용되는 단어를 하이라이트 해주고, 리스팅 해준다.
 - Advanced New File: path를 통해 파일을 만들 수 있다. path가 존재하지 않는 다면 디렉토리를 만든다. 새로운 파일 생성 할 때 유용하다.
