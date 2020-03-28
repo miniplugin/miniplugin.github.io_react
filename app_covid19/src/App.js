@@ -26,7 +26,7 @@ class App extends Component {
 
     //부모클래스 props속성의 state값 초기화
     this.state = {
-      searchWord: '충청남도 천안시', //검색어 상태 입력예, 도(광역시) 시(군) 단위입력
+      searchWord: '충남 천안시', //검색어 상태 입력예, 도(광역시) 시(군) 단위입력
       fetchUrl: '/ndata.js',
       headerBanner: {
         title: '이 사이트는 리액트기술 테스트용 입니다.',
@@ -57,14 +57,14 @@ class App extends Component {
             <SearchForm
               searchWord={this.state.searchWord}
               onSubmit={function (_searchWord) {
-                console.log ('_searchWord', _searchWord); //디버그
-                this.setState ({seearchWord: _searchWord});
+                //console.log ('_searchWord', _searchWord); //디버그
+                this.setState ({searchWord: _searchWord});
                 //화면 리프레시가 않됨-관련함수:shouldComponentUpdate.
               }.bind (this)}
             />
             <Map
               fetchUrldata={this.state.fetchUrl}
-              searchWorddata={this.state.searchWord}
+              searchWord={this.state.searchWord}
             />
           </div>
         </div>

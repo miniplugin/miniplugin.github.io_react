@@ -7,6 +7,11 @@ import {
   Marker,
   InfoWindow,
 } from 'react-google-maps';
+/* import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from 'use-places-autocomplete'; 구글API키가 있어야 react geocode get lat from places 사용가능.
+*/
 
 /**
      * 두 날짜의 차이를 일자로 구한다.(조회 종료일 - 조회 시작일)
@@ -85,13 +90,13 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
           marker.address
         ); */
         if (resultday < 1) {
-          //'0~1일이하';
+          //'0~1일미만';
           icons = '/design_publish/img/red-dot.png';
         } else if (resultday < 4) {
-          //'1~3일이하';
+          //'1~3일미만';
           icons = '/design_publish/img/yellow-dot.png';
         } else if (resultday < 9) {
-          //'4~9일이하';
+          //'4~9일미만';
           icons = '/design_publish/img/green-dot.png';
         }
         //Math.floor (Math.random () * 50000 + 1)
@@ -143,9 +148,20 @@ export default class ShelterMap extends Component {
       //alert ('this.state.mapSearchWord);
       //alert ('Map: ' + this.props.searchWord);
       this.setState ({mapSearchWord: this.props.searchWord});
+      /* 구글 API키가 있어야만 사용가능.  그래서 건너띔
+      //https://dev.to/wellyshen/introducing-use-places-autocomplete-react-hook-for-google-maps-places-autocomplete-41h5
+      getGeocode ({address: this.props.searchWord})
+        .then (results => getLatLng (results[0]))
+        .then (({lat, lng}) => {
+          console.log ('📍 Coordinates: ', {lat, lng});
+        })
+        .catch (error => {
+          console.log ('😱 Error: ', error);
+        });
+        */
       this.componentDidMount ();
+      console.log ('componentDidUpdate');
     }
-    console.log ('componentDidUpdate');
   }
   componentDidMount () {
     fetch (this.props.fetchUrldata)
@@ -183,7 +199,7 @@ export default class ShelterMap extends Component {
         mapdata = mapdata.replace (/latlng/g, '"latlng"').trim ();
         //console.log ('mapdata--------------: ', mapdata);
         var jsondata = JSON.parse (mapdata);
-        //console.log ('jsondata.length----------: ', jsondata.length);
+        //console.log ('jsondata----------: ', jsondata);
         var results = [];
         let today = new Date ();
         let year = today.getFullYear (); // 년도
@@ -206,13 +222,34 @@ export default class ShelterMap extends Component {
         /* jsondata = jsondata.filter (l => {
           return l.name.toLowerCase ().match ('천안');
         }); */
-        //console.log ('returnObject.length----------: ', results);
         if (results.length === 0) {
+          alert ('검색된 결과가 없습니다.');
           return false;
         } else {
           this.setState ({shelters: results});
-          this.setState ({mapReflat: null});
-          this.setState ({mapReflng: null});
+          //this.setState ({mapReflat: null});
+          //this.setState ({mapReflng: null});
+          //검색에 해당하는 lat/lng 값 추출
+          //console.log ('returnObject.length----------: ', results);
+          for (var i2 = 0; i2 < results.length; i2++) {
+            var str = this.props.searchWord;
+            var n = str.includes (results[i2]['name']);
+            //console.log ('this.state.mapReflat === ', n);
+            if (n === true) {
+              var latlng3 = results[i2]['latlng'];
+              var arraylatlng3 = latlng3.split (',');
+              var lat3 = arraylatlng3[0];
+              var lng3 = arraylatlng3[1];
+              this.setState ({mapReflat: lat3});
+              this.setState ({mapReflng: lng3});
+              break;
+            }
+          }
+          if (n === false) {
+            alert ('검색된 결과가 없습니다. 정확한 도시명을 입력해 주세요!');
+          }
+          //console.log ('this.state.mapReflat === ', this.state.mapReflat);
+          //console.log ('this.state.mapReflng === ', this.state.mapReflng);
         }
       })
       .catch (e => {

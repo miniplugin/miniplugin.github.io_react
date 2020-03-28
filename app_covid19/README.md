@@ -21,4 +21,4 @@
 - 구글맵 기술참조: https://github.com/google-map-react/google-map-react //사용함.
 - npm install --save google-map-react //사용함.
 - 파스타 클라우드에 배포: http://covid19.paas-ta.org/
-- 작업예정: 검색기능 npm install --save react-geocode //사용예정.
+- 검색기능 추가.

@@ -32,7 +32,7 @@ class SearchForm extends Component {
             type="search"
             className="tbox"
             title="검색어를 입력해주세요"
-            placeholder="반드시, 시(도) 구 동 순서로 입력"
+            placeholder="반드시, 시 또는 도(축약:예 충남)만 입력"
             value={this.state.searchWord}
             onChange={this.inputFormHandler}
           />
