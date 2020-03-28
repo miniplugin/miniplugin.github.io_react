@@ -30,25 +30,24 @@ class Header extends Component {
               <ul className="gnb clear">
                 <li>
                   <a href="#LINK" className="openAll1 openAll">
-                    리액트정보
+                  공적마스크 판매처 및 재고 현황
                   </a>
-
                   <div className="gnb_depth gnb_depth2_1">
                     <ul className="submenu_list">
                       <li>
                         <a
-                          href="https://github.com/miniplugin/miniplugin.github.io"
+                          href="https://miniplugin.github.io/"
                           target="_new"
                         >
-                          국내
+                        공적마스크 판매처 및 재고 현황
                         </a>
                       </li>
                       <li>
                         <a
-                          href="https://github.com/miniplugin/miniplugin.github.io"
+                          href="https://github.com/miniplugin/miniplugin.github.io/tree/master/app_mask"
                           target="_new"
                         >
-                          해외
+                          Git 소스 정보
                         </a>
                       </li>
                     </ul>
@@ -60,11 +59,25 @@ class Header extends Component {
                   </div>
                 </li>
                 <li>
-                  <a href="#LINK" className="openAll2 openAll">고객센터</a>
+                  <a href="#LINK" className="openAll2 openAll">코로나19확진자 방문처 조회</a>
                   <div className="gnb_depth gnb_depth2_2">
                     <ul className="submenu_list">
-                      <li><a href="#LINK">한줄게시판</a></li>
-                      <li><a href="#LINK">문의하기</a></li>
+                    <li>
+                    <a
+                      href="http://covid19.paas-ta.org/"
+                      target="_new"
+                    >
+                    코로나19확진자 방문처 조회
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/miniplugin/miniplugin.github.io/tree/master/app_covid19"
+                      target="_new"
+                    >
+                    Git 소스 정보
+                    </a>
+                  </li>
                     </ul>
                     <p className="closeSubmenu" style={{float: 'right'}}>
                       <a href="#LINK" style={menuCloseStyle}>
