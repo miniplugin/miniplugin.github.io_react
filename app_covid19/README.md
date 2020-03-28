@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 코로나19확진자 방문처 확인 웹 프로젝트
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+- 아직 공공마스크 판매처 처럼 공공데이터 API로 오픈되어 있지 않아서 아래 데이터를 참조하게 됩니다.
 
-### `npm start`
+- 공공데이터로 [코로나19확진자 방문처] 가 오픈되면, 그 API 자료를 사용할 예정 입니다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 참고: 코로나19확진자 방문처 확인 https://coronamap.site/
+- 데이터 참조: https://coronamap.site/javascripts/ndata.js
+- 아래 데이터(2차원 배열json) 예: 방문날짜에 따른 색상구분 빨강:1일이하, 노랑:2~4일이하, 녹색:3~9일이하
+- 파일구조(예정): 신규폴더명 app_covid19 로 create-react-app 앱 생성 후 작업
+- 배포위치: 파스타 클라우드 : 리액트build 후 manifest.yml파일을 빌드폴더에 붙여넣고 cf login + cf push
+- 확인URL: http://covid19.paas-ta.org/
+- 주\_기술참조: https://medium.com/@imranhsayed/google-maps-in-react-autocomplete-location-search-draggable-marker-marker-infobox-565ab8e8cf22
+- 부\_기술참조: https://github.com/googlemap-react/googlemap-react
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+### 20200328 작업내역(아래)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- 구글지도에 코로나19확진자 방문처 위치 매칭.
+- 구글맵 기술참조: https://github.com/google-map-react/google-map-react //사용함.
+- npm install --save google-map-react //사용함.
+- 작업예정: 검색기능 npm install --save react-geocode //사용예정.
