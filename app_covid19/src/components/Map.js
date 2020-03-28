@@ -90,13 +90,13 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
           marker.address
         ); */
         if (resultday < 1) {
-          //'0~1일미만';
+          //'0~1일이하';
           icons = '/design_publish/img/red-dot.png';
         } else if (resultday < 4) {
-          //'1~3일미만';
+          //'1~3일이하';
           icons = '/design_publish/img/yellow-dot.png';
         } else if (resultday < 9) {
-          //'4~9일미만';
+          //'4~9일이하';
           icons = '/design_publish/img/green-dot.png';
         }
         //Math.floor (Math.random () * 50000 + 1)
