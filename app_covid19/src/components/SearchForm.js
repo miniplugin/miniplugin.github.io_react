@@ -9,7 +9,7 @@ class SearchForm extends Component {
     this.inputFormHandler = this.inputFormHandler.bind (this);
   }
   inputFormHandler (e) {
-    console.log (e.target.value);
+    //console.log (e.target.value);
     this.setState ({[e.target.id]: e.target.value});
   }
   render () {

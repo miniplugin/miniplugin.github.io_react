@@ -58,7 +58,7 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
   }
   return (
     <GoogleMap
-      defaultZoom={12}
+      defaultZoom={11}
       defaultCenter={{lat: Number (lat), lng: Number (lng)}}
       center={{
         lat: Number (lat),
@@ -90,12 +90,12 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
           marker.address
         ); */
         if (resultday < 1) {
-          //'0~1일이하';
+          //'0~1일미만';
           icons = '/design_publish/img/red-dot.png';
         } else if (resultday < 4) {
-          //'1~3일이하';
+          //'1~4일미만';
           icons = '/design_publish/img/yellow-dot.png';
-        } else if (resultday < 9) {
+        } else if (resultday <= 9) {
           //'4~9일이하';
           icons = '/design_publish/img/green-dot.png';
         }
@@ -107,8 +107,8 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
             position={{lat: Number (lat2), lng: Number (lng2)}}
             options={{icon: icons}}
           >
-            {props.selectedMarker === marker &&
-              <InfoWindow>
+          {props.selectedMarker === marker &&
+              <InfoWindow onCloseClick={()=>{console.log("marker 유지가 되지 않아서, 토글기능 않되는 문제있음. 다른 마커를 클릭하면 초기화됨.")}}>
                 <div>
                   {'확진자: ' + marker.name}<br />
                   {'방문처: ' + marker.address}<br />
@@ -160,7 +160,7 @@ export default class ShelterMap extends Component {
         });
         */
       this.componentDidMount ();
-      console.log ('componentDidUpdate');
+      //console.log ('componentDidUpdate');
     }
   }
   componentDidMount () {
@@ -169,11 +169,12 @@ export default class ShelterMap extends Component {
       //.then (mapdata => console.log ('JSONP--------------: ', mapdata))
       .then (responseText => {
         //var position = JSON.stringify (responseText);
+        // eslint-disable-next-line
         var regExp = new RegExp ('//.*\n', 'gm');
-        var regExp2 = new RegExp ('address_english:\n', 'gm');
-        var regExp3 = new RegExp ('address_english.*\n', 'gm');
-        var regExp5 = new RegExp ('address_name.*\n', 'gm');
-        var regExp13 = new RegExp ('address:\n', 'gm');
+        var regExp2 = new RegExp ('address_english:\n', 'gm');// eslint-disable-line
+        var regExp3 = new RegExp ('address_english.*\n', 'gm');// eslint-disable-line
+        var regExp5 = new RegExp ('address_name.*\n', 'gm');// eslint-disable-line
+        var regExp13 = new RegExp ('address:\n', 'gm');// eslint-disable-line
         var mapdata = responseText.replace (/var position = /g, '').trim ();
         mapdata = mapdata.replace (regExp, '').trim ();
         mapdata = mapdata.replace (regExp2, 'address_english:').trim ();
@@ -214,7 +215,7 @@ export default class ShelterMap extends Component {
           );
           //console.log ('calDay-----------------: ', calDay);
           //jsondata[i]['month']+jsondata[i]['day']
-          if (calDay < 9) {
+          if (calDay <= 9) {
             jsondata[i]['id'] = i;
             results.push (jsondata[i]);
           }
@@ -278,10 +279,10 @@ export default class ShelterMap extends Component {
     let mapRef = this._mapComponent;
     var lat = mapRef.getCenter ().lat ();
     var lng = mapRef.getCenter ().lng ();
-    console.log ('mapRef:-------------', this.state.mapRef);
-    console.log (
+    //console.log ('mapRef:-------------', this.state.mapRef);
+    /* console.log (
       mapRef.getCenter ().lat () + '; ' + mapRef.getCenter ().lng ()
-    );
+    ); */
     this.setState ({mapReflat: lat});
     this.setState ({mapReflng: lng});
   }
