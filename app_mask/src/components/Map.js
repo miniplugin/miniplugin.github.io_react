@@ -85,9 +85,10 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
             onClick={onClick}
             position={{lat: marker.lat, lng: marker.lng}}
             options={{icon: icons}}
+            draggable={true}
           >
             {props.selectedMarker === marker &&
-              <InfoWindow>
+              <InfoWindow onCloseClick={props.onClick}>
                 <div>
                   {'판매처: ' + marker.name}<br />
                   {'재고상태: ' + icons_text}<br />

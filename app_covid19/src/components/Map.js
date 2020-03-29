@@ -58,7 +58,7 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
   }
   return (
     <GoogleMap
-      defaultZoom={11}
+      defaultZoom={12}
       defaultCenter={{lat: Number (lat), lng: Number (lng)}}
       center={{
         lat: Number (lat),
@@ -100,15 +100,18 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
           icons = '/design_publish/img/green-dot.png';
         }
         //Math.floor (Math.random () * 50000 + 1)
+        //onCloseClick={()=>{console.log("marker 유지가 되지 않아서, 토글기능 않되는 문제있음. 다른 마커를 클릭하면 초기화됨.")}}
+        //onCloseClick={props.onClick} 마커 팝업 정보창 토글기능(아래 InfoWindow)
         return (
           <Marker
             key={marker.id}
             onClick={onClick}
             position={{lat: Number (lat2), lng: Number (lng2)}}
             options={{icon: icons}}
+            draggable={true}
           >
           {props.selectedMarker === marker &&
-              <InfoWindow onCloseClick={()=>{console.log("marker 유지가 되지 않아서, 토글기능 않되는 문제있음. 다른 마커를 클릭하면 초기화됨.")}}>
+              <InfoWindow onCloseClick={props.onClick}>
                 <div>
                   {'확진자: ' + marker.name}<br />
                   {'방문처: ' + marker.address}<br />

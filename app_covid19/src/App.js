@@ -30,8 +30,8 @@ class App extends Component {
       fetchUrl: '/ndata.js',
       headerBanner: {
         title: '이 사이트는 리액트기술 테스트용 입니다.',
-        sub: 'Google 지도를 제대로 로드할 수 없습니다.',
-      }, //json 1차원 데이터 객체
+        sub: '이 웹사이트의 소유자이신가요?.',
+      }, //json 1차원 데이터 객체 sub: 'Google 지도를 제대로 로드할 수 없습니다.',
     };
   }
 
