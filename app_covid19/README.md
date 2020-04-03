@@ -12,6 +12,7 @@
 - 확인URL: http://covid19.paas-ta.org/
 - 주기술참조: https://medium.com/@imranhsayed/google-maps-in-react-autocomplete-location-search-draggable-marker-marker-infobox-565ab8e8cf22
 - 부기술참조: https://github.com/googlemap-react/googlemap-react
+- CORS 문제처리 노드js프록시서버정보: https://github.com/Rob--W/cors-anywhere
 
 ---
 
