@@ -27,7 +27,7 @@ class HeaderBanner extends Component {
           <p className="location">
             Google Maps API 키를 입력하지 않았기 때문에 아래와 같은 메세지가 나옵니다.
             <span className="path">/</span><br /><br />
-            [ {this.props.sub} ] - 하지만, 결과를 확인 하시는 데 지장은 없습니다.
+            [ {this.props.sub} ] - 그리고, 데이터는 Proxy를 거치기 때문에 10~20초 정도 기다리셔야 합니다.
             <br /><br />[지도에 표시된 핀 이미지 색상의 의미]<br />
             <img src="/design_publish/img/red-dot.png" alt="plenty" />
             [확진 0~1일 미만] /
