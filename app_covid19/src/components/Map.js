@@ -110,7 +110,7 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
             options={{icon: icons}}
             draggable={true}
           >
-          {props.selectedMarker === marker &&
+            {props.selectedMarker === marker &&
               <InfoWindow onCloseClick={props.onClick}>
                 <div>
                   {'확진자: ' + marker.name}<br />
@@ -167,17 +167,21 @@ export default class ShelterMap extends Component {
     }
   }
   componentDidMount () {
-    fetch (this.props.fetchUrldata)
+    //http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts 추가 실시간 데이터
+    fetch (
+      'http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts' +
+        this.props.fetchUrldata
+    )
       .then (response => response.text ())
       //.then (mapdata => console.log ('JSONP--------------: ', mapdata))
       .then (responseText => {
         //var position = JSON.stringify (responseText);
         // eslint-disable-next-line
         var regExp = new RegExp ('//.*\n', 'gm');
-        var regExp2 = new RegExp ('address_english:\n', 'gm');// eslint-disable-line
-        var regExp3 = new RegExp ('address_english.*\n', 'gm');// eslint-disable-line
-        var regExp5 = new RegExp ('address_name.*\n', 'gm');// eslint-disable-line
-        var regExp13 = new RegExp ('address:\n', 'gm');// eslint-disable-line
+        var regExp2 = new RegExp ('address_english:\n', 'gm'); // eslint-disable-line
+        var regExp3 = new RegExp ('address_english.*\n', 'gm'); // eslint-disable-line
+        var regExp5 = new RegExp ('address_name.*\n', 'gm'); // eslint-disable-line
+        var regExp13 = new RegExp ('address:\n', 'gm'); // eslint-disable-line
         var mapdata = responseText.replace (/var position = /g, '').trim ();
         mapdata = mapdata.replace (regExp, '').trim ();
         mapdata = mapdata.replace (regExp2, 'address_english:').trim ();
