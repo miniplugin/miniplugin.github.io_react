@@ -168,10 +168,7 @@ export default class ShelterMap extends Component {
   }
   componentDidMount () {
     //http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts 추가 실시간 데이터
-    fetch (
-      'http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts' +
-        this.props.fetchUrldata
-    )
+    fetch ('http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts' + this.props.fetchUrldata)
       .then (response => response.text ())
       //.then (mapdata => console.log ('JSONP--------------: ', mapdata))
       .then (responseText => {
@@ -182,6 +179,7 @@ export default class ShelterMap extends Component {
         var regExp3 = new RegExp ('address_english.*\n', 'gm'); // eslint-disable-line
         var regExp5 = new RegExp ('address_name.*\n', 'gm'); // eslint-disable-line
         var regExp13 = new RegExp ('address:\n', 'gm'); // eslint-disable-line
+        //console.log ('responseText--------------: ', responseText);
         var mapdata = responseText.replace (/var position = /g, '').trim ();
         mapdata = mapdata.replace (regExp, '').trim ();
         mapdata = mapdata.replace (regExp2, 'address_english:').trim ();
@@ -205,6 +203,9 @@ export default class ShelterMap extends Component {
         mapdata = mapdata.replace (/full/g, '"full"').trim ();
         mapdata = mapdata.replace (/address/g, '"address"').trim ();
         mapdata = mapdata.replace (/latlng/g, '"latlng"').trim ();
+        // eslint-disable-next-line
+        mapdata = mapdata.replace (/,  }/g, '}').trim ();
+        mapdata = mapdata.replace (/,]/g, ']').trim ();
         //console.log ('mapdata--------------: ', mapdata);
         var jsondata = JSON.parse (mapdata);
         //console.log ('jsondata----------: ', jsondata);
