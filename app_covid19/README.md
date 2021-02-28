@@ -34,6 +34,7 @@
 - 빌드폴더에 내용을 깃허브 레포지토리 루트에 올림.
 - 깃허브에 배포확인: https://miniplugin.github.io/
 - 깃허브에 배포시 문제없으면 그대로 진행 단, 보안사항때문에 않될때 (아래변경하세요)
+- fetch('https://coroname.me/getdata')//깃에서 실시간OK.
 - fetch('http://cors-anywhere.herokuapp.com/https://coroname.me/getdata')//로컬에서 실시간
 - fetch (this.props.fetchUrldata)//깃 배포시 실시간안됨.
 
