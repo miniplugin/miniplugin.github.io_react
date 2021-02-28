@@ -64,7 +64,6 @@ class Header extends Component {
                     <li>
                     <a
                       href="https://miniplugin.github.io/"
-                      target="_new"
                     >
                     코로나19확진자 방문처 조회
                     </a>
