@@ -36,8 +36,7 @@ class Header extends Component {
                     <ul className="submenu_list">
                       <li>
                         <a
-                          href="https://miniplugin.github.io/"
-                          target="_new"
+                          href="javascript:alert('현재 마스크 요일제가 종료되었습니다.')"
                         >
                         공적마스크 판매처 및 재고 현황
                         </a>
@@ -64,7 +63,7 @@ class Header extends Component {
                     <ul className="submenu_list">
                     <li>
                     <a
-                      href="http://covid19.paas-ta.org/"
+                      href="https://miniplugin.github.io/"
                       target="_new"
                     >
                     코로나19확진자 방문처 조회

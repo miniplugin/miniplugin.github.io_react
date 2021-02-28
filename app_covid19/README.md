@@ -33,6 +33,9 @@
 - 배포버전 만들기: 작업폴더>npm run build
 - 빌드폴더에 내용을 깃허브 레포지토리 루트에 올림.
 - 깃허브에 배포확인: https://miniplugin.github.io/
+- 깃허브에 배포시 주의사항(아래변경하세요)
+- fetch('http://cors-anywhere.herokuapp.com/https://coroname.me/getdata')//로컬에서 실시간
+- fetch (this.props.fetchUrldata)//깃 배포시 실시간안됨.
 
 ### 20200328 작업내역(아래)
 
