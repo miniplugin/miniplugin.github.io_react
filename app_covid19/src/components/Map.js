@@ -76,10 +76,8 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
         let date = today.getDate (); // 날짜
         //let day = today.getDay (); // 요일
         var nows = year + '-' + month + '-' + date;
-        var resultday = calDateRange (
-          year + '-' + marker.month + '-' + marker.day,
-          nows
-        );
+        var dateSplit = marker.visitedDate.split('T');
+        var resultday = calDateRange (dateSplit[0],nows);
         var latlng2 = marker.latlng;
         var arraylatlng2 = latlng2.split (',');
         var lat2 = arraylatlng2[0];
@@ -113,9 +111,9 @@ const MapWithAMarker = compose (withScriptjs, withGoogleMap) (props => {
             {props.selectedMarker === marker &&
               <InfoWindow onCloseClick={props.onClick}>
                 <div>
-                  {'확진자: ' + marker.name}<br />
-                  {'방문처: ' + marker.address}<br />
-                  {'확진일: ' + marker.month + '월' + marker.day + '일'}
+                  {'장소: ' + marker.place}<br />
+                  {'주소: ' + marker.address}<br />
+                  {'방문일: ' + marker.visitedDate}
                 </div>
               </InfoWindow>}
             }
@@ -168,47 +166,18 @@ export default class ShelterMap extends Component {
   }
   componentDidMount () {
     //http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts 추가 실시간 데이터
-    fetch ('http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts' + this.props.fetchUrldata)
+    fetch('http://cors-anywhere.herokuapp.com/https://coroname.me/getdata')
+    //fetch (this.props.fetchUrldata)
       .then (response => response.text ())
       //.then (mapdata => console.log ('JSONP--------------: ', mapdata))
+      //,"__v":0}
       .then (responseText => {
         //var position = JSON.stringify (responseText);
-        // eslint-disable-next-line
-        var regExp = new RegExp ('//.*\n', 'gm');
-        var regExp2 = new RegExp ('address_english:\n', 'gm'); // eslint-disable-line
-        var regExp3 = new RegExp ('address_english.*\n', 'gm'); // eslint-disable-line
-        var regExp5 = new RegExp ('address_name.*\n', 'gm'); // eslint-disable-line
-        var regExp13 = new RegExp ('address:\n', 'gm'); // eslint-disable-line
-        //console.log ('responseText--------------: ', responseText);
-        var mapdata = responseText.replace (/var position = /g, '').trim ();
-        mapdata = mapdata.replace (regExp, '').trim ();
-        mapdata = mapdata.replace (regExp2, 'address_english:').trim ();
-        mapdata = mapdata.replace (regExp13, 'address:').trim ();
-        mapdata = mapdata.replace (/;/g, '').trim ();
-        mapdata = mapdata.replace (regExp3, '').trim ();
-        mapdata = mapdata.replace (regExp5, '').trim ();
-        //mapdata = mapdata.replace (/\[/g, '{"position": [').trim ();
-        //mapdata = mapdata.replace (/\]/g, ']}').trim ();
-        mapdata = mapdata
-          .replace (/\r/gi, '')
-          .replace (/\n/gi, '')
-          .replace (/\t/gi, '')
-          .replace (/\f/gi, '');
-        mapdata = mapdata.replace (/solo/g, '"solo"').trim ();
-        mapdata = mapdata.replace (/profile/g, '"profile"').trim ();
-        mapdata = mapdata.replace (/tag/g, '"tag"').trim ();
-        mapdata = mapdata.replace (/month/g, '"month"').trim ();
-        mapdata = mapdata.replace (/day/g, '"day"').trim ();
-        mapdata = mapdata.replace (/name/g, '"name"').trim ();
-        mapdata = mapdata.replace (/full/g, '"full"').trim ();
-        mapdata = mapdata.replace (/address/g, '"address"').trim ();
-        mapdata = mapdata.replace (/latlng/g, '"latlng"').trim ();
-        // eslint-disable-next-line
-        mapdata = mapdata.replace (/,  }/g, '}').trim ();
-        mapdata = mapdata.replace (/,]/g, ']').trim ();
         //console.log ('mapdata--------------: ', mapdata);
-        var jsondata = JSON.parse (mapdata);
+        var rootjsondata = JSON.parse (responseText);
+        var jsondata = rootjsondata.data;
         //console.log ('jsondata----------: ', jsondata);
+        //console.log ('debug--------------: ', jsondata[0]);
         var results = [];
         let today = new Date ();
         let year = today.getFullYear (); // 년도
@@ -217,19 +186,19 @@ export default class ShelterMap extends Component {
         //let day = today.getDay (); // 요일
         var nows = year + '-' + month + '-' + date;
         for (var i = 0; i < jsondata.length; i++) {
+          var dateSplit = jsondata[i]['visitedDate'].split('T');
           var calDay = calDateRange (
-            year + '-' + jsondata[i]['month'] + '-' + jsondata[i]['day'],
-            nows
+            dateSplit[0], nows
           );
           //console.log ('calDay-----------------: ', calDay);
-          //jsondata[i]['month']+jsondata[i]['day']
           if (calDay <= 9) {
-            jsondata[i]['id'] = i;
+            jsondata[i]['id'] = i;//여기서 마커 데이터 ID가 최초로 발생됨
             results.push (jsondata[i]);
           }
         }
+       console.log ('returnObject.length----------: ', results);
         /* jsondata = jsondata.filter (l => {
-          return l.name.toLowerCase ().match ('천안');
+          return l.region.toLowerCase ().match ('천안');
         }); */
         if (results.length === 0) {
           alert ('검색된 결과가 없습니다.');
@@ -242,7 +211,7 @@ export default class ShelterMap extends Component {
           //console.log ('returnObject.length----------: ', results);
           for (var i2 = 0; i2 < results.length; i2++) {
             var str = this.props.searchWord;
-            var n = str.includes (results[i2]['name']);
+            var n = str.includes (results[i2]['region']);
             //console.log ('this.state.mapReflat === ', n);
             if (n === true) {
               var latlng3 = results[i2]['latlng'];

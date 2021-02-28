@@ -18,6 +18,22 @@
 
 ---
 
+### 20210301 작업내역(아래)
+
+- 작업PC에 신규개발환경 셋팅시 VS code 로 개발환경설치하고, cmd 창에서 아래 내용 추가
+- npm 설치 : 노드패키지매니저이기 때문에 노드js를 설치하면 포함됨 https://nodejs.org/
+- npm버전확인 : npm -v
+- react앱중 create-react-app(이것이 앱이름임) 설치: npm install create-react-app
+- create-react-app 버전확인: create-react-app -V
+- create-react-app app_covid19 로 covid19앱 생성
+- 구글맵라이브러리설치: 작업폴더>npm install react-google-maps //엔터
+- 라이브러리 fix메세지 나오면: 작업폴더>npm audit fix //엔터
+- 깃에서 강사 자료 받아서, 위 app_covid19폴더 내용을 덮어씀
+- PC에서 앱실행: npm run start
+- 배포버전 만들기: 작업폴더>npm run build
+- 빌드폴더에 내용을 깃허브 레포지토리 루트에 올림.
+- 깃허브에 배포확인: https://miniplugin.github.io/
+
 ### 20200328 작업내역(아래)
 
 - 구글지도에 코로나19확진자 방문처 위치 매칭.
