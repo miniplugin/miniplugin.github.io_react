@@ -165,8 +165,8 @@ export default class ShelterMap extends Component {
     }
   }
   componentDidMount () {
-    //http://cors-anywhere.herokuapp.com/https://coronamap.site/javascripts 추가 실시간 데이터
-    fetch('http://cors-anywhere.herokuapp.com/https://coroname.me/getdata')//로컬에서 실시간
+    fetch('https://coroname.me/getdata')//로컬에서 실시간
+    //fetch('http://cors-anywhere.herokuapp.com/https://coroname.me/getdata')//로컬에서 실시간
     //fetch (this.props.fetchUrldata)//깃 배포시 실시간안됨.
       .then (response => response.text ())
       //.then (mapdata => console.log ('JSONP--------------: ', mapdata))
